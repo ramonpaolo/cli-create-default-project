@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/types",
+  "description": "CLI to create default structure of a project express CRUD",
+  "keywords": ["cli", "default-structure", "express", "crud"],
   "author": {
     "name": "Ramon Paolo Maram",
     "url": "https://github.com/ramonpaolo"
