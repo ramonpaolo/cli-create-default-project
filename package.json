@@ -1,8 +1,16 @@
 {
   "name": "cli-create-default-project",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/types",
+  "author": {
+    "name": "Ramon Paolo Maram",
+    "url": "https://github.com/ramonpaolo"
+  },
+  "repository": {
+    "url": "https://github.com/ramonpaolo/cli-create-default-project.git",
+    "type": "git"
+  },
   "bin": {
     "create-project": "dist/index.js"
   },
