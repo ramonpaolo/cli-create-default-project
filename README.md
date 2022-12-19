@@ -98,4 +98,4 @@ After that this command finalize, you can see this struture of folders and files
 
 </center>
 
-###### Made with Love by Ramon Paolo Maram :3 /Users/ramonpaolomaram/.yarn/bin
+###### Made with Love by Ramon Paolo Maram :3
