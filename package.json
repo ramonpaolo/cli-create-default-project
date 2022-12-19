@@ -1,14 +1,22 @@
 {
   "name": "cli-create-default-project",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "types": "dist/types",
   "description": "CLI to create default structure of a project express CRUD",
-  "keywords": ["cli", "default-structure", "express", "crud"],
+  "keywords": [
+    "cli",
+    "default-structure",
+    "express",
+    "crud"
+  ],
   "author": {
     "name": "Ramon Paolo Maram",
     "url": "https://github.com/ramonpaolo"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "url": "https://github.com/ramonpaolo/cli-create-default-project.git",
     "type": "git"
