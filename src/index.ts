@@ -3,17 +3,22 @@
 import yargs from 'yargs'
 import { exec } from 'child_process'
 
-const argv = yargs.option('database', {
-    type: 'array'
-})
-    .option('cloud', {
-        type: 'array'
-    })
+const argv = yargs
     .option('http2', {
-        type: 'boolean'
+        type: 'boolean',
+        description: 'Configure the project to use http 2.0(sdpy)'
     })
     .option('docker', {
-        type: 'boolean'
+        type: 'boolean',
+        description: 'Create default docker files'
+    })
+    .option('database', {
+        type: 'array',
+        description: 'Install the library for the database choosed'
+    })
+    .option('cloud', {
+        type: 'array',
+        description: 'Install the sdk for the cloud choosed'
     })
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .argv as any
