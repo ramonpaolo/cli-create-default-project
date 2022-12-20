@@ -27,7 +27,7 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node ./src/index.ts",
-    "prepublish": "tsc"
+    "prepublish": "rm -rf dist && tsc"
   },
   "devDependencies": {
     "@types/node": "^18.11.17",
