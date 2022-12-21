@@ -79,6 +79,15 @@ const downloadBasicFiles = () => {
     exec(baseUrl + '.eslintrc.json')
     exec(baseUrl + '.env')
 
+    if(keysAvailables.includes('docker'))
+        exec(baseUrl + '.dockerignore')
+        
+    // Create docker-compose files
+    if(keysAvailables.includes('docker') && !keysAvailables.includes('database')){
+        exec(baseUrl + 'docker-compose.yaml')
+        exec(baseUrl + 'docker-compose-dev.yaml')
+    }
+
     setTimeout(installOptionalPackages, 2000)
 }
 
@@ -119,12 +128,9 @@ const installOptionalPackages = () => {
 
                     // Create conf file for NGINX http 1.1
                     exec(baseUrl + 'docker/settings/nginx.conf', () => exec('mv nginx.conf docker/settings/nginx.conf'))
-                }
 
-                // Create docker-compose files
-                exec(baseUrl + 'docker-compose.yaml')
-                exec(baseUrl + 'docker-compose-dev.yaml')
-                exec(baseUrl + '.dockerignore')
+                    if (keysAvailables.includes('database')) configureOptionalsDockerComposeFiles()
+                }
                 break;
             case 'http2':
                 exec('yarn add spdy')
@@ -142,4 +148,61 @@ const installOptionalPackages = () => {
     }
     exec('yarn add express compression cors axios dotenv express-rate-limit eslint helmet')
     exec('yarn add typescript jest supertest @babel/preset-env @babel/preset-typescript @types/supertest @types/node @types/express @types/compression @types/cors @types/jest nodemon ts-node @typescript-eslint/eslint-plugin @typescript-eslint/parser @types/helmet -D', () => exec('yarn install', () => process.exit(0)))
+}
+
+const configureOptionalsDockerComposeFiles = () => {
+    const values = argv['database'] as Database[]
+
+    if (values.includes('mongo') && values.includes('postgres') && values.includes('redis')) {
+        exec(baseUrl + 'docker-compose-redis-mongo-postgresql.yaml')
+        exec(baseUrl + 'docker-compose-dev-redis-mongo-postgresql.yaml')
+        setTimeout(() => {
+            exec('mv docker-compose-dev-redis-mongo-postgresql.yaml docker-compose-dev.yml')
+            exec('mv docker-compose-redis-mongo-postgresql.yaml docker-compose.yml')
+        }, 2000)
+    } else if (values.includes('redis') && values.includes('mongo')) {
+        exec(baseUrl + 'docker-compose-redis-mongo.yaml')
+        exec(baseUrl + 'docker-compose-dev-redis-mongo.yaml')
+        setTimeout(() => {
+            exec('mv docker-compose-dev-redis-mongo.yaml docker-compose-dev.yml')
+            exec('mv docker-compose-redis-mongo.yaml docker-compose.yml')
+        }, 2000)
+    } else if (values.includes('redis') && values.includes('postgres')) {
+        exec(baseUrl + 'docker-compose-redis-postgresql.yaml')
+        exec(baseUrl + 'docker-compose-dev-redis-postgresql.yaml')
+        setTimeout(() => {
+            exec('mv docker-compose-dev-redis-postgresql.yaml docker-compose-dev.yml')
+            exec('mv docker-compose-postgresql.yaml docker-compose.yml')
+        }, 2000)
+    } else if (values.includes('mongo') && values.includes('postgres')) {
+        exec(baseUrl + 'docker-compose-mongo-postgresql.yaml')
+        exec(baseUrl + 'docker-compose-dev-mongo-postgresql.yaml')
+        setTimeout(() => {
+            exec('mv docker-compose-dev-mongo-postgresql.yaml docker-compose-dev.yml')
+            exec('mv docker-compose-mongo-postgresql.yaml docker-compose.yml')
+        }, 2000)
+    } else if (values.includes('redis')) {
+        exec(baseUrl + 'docker-compose-redis.yaml')
+        exec(baseUrl + 'docker-compose-dev-redis.yaml')
+        setTimeout(() => {
+            exec('mv docker-compose-dev-redis.yaml docker-compose-dev.yml')
+            exec('mv docker-compose-redis.yaml docker-compose.yml')
+        }, 2000)
+    } else if (values.includes('mongo')) {
+        exec(baseUrl + 'docker-compose-mongo.yaml')
+        exec(baseUrl + 'docker-compose-dev-mongo.yaml')
+        setTimeout(() => {
+            exec('mv docker-compose-dev-mongo.yaml docker-compose-dev.yml')
+            exec('mv docker-compose-mongo.yaml docker-compose.yml')
+        }, 2000)
+    } else if (values.includes('postgres')) {
+        exec(baseUrl + 'docker-compose-postgresql.yaml')
+        exec(baseUrl + 'docker-compose-dev-postgresql.yaml')
+
+        setTimeout(() => {
+            exec('mv docker-compose-dev-postgresql.yaml docker-compose-dev.yml')
+            exec('mv docker-compose-postgresql.yaml docker-compose.yml')
+        }, 2000)
+    }
+
 }
