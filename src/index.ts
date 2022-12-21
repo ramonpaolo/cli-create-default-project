@@ -49,6 +49,7 @@ const createFolders = () => {
     exec('mkdir src/services')
     exec('mkdir src/interfaces')
     exec('mkdir src/middlewares')
+    exec('mkdir src/utils')
     exec('mkdir src/__tests__')
 
     if (keysAvailables.includes('docker')) {
@@ -60,6 +61,14 @@ const createFolders = () => {
 const downloadBasicFiles = () => {
     exec(baseUrl + 'src/index.ts', () => {
         exec('mv index.ts src/index.ts')
+    })
+
+    exec(baseUrl + 'src/settings/logger.settings.ts', () => {
+        exec('mv logger.settings.ts src/settings/logger.settings.ts')
+    })
+
+    exec(baseUrl + 'src/utils/logger_error.utils.ts', () => {
+        exec('mv logger_error.utils.ts src/utils/logger_error.utils.ts')
     })
 
     exec(baseUrl + 'src/__tests__/index.spec.ts', () => {
@@ -81,7 +90,7 @@ const downloadBasicFiles = () => {
 
     if(keysAvailables.includes('docker'))
         exec(baseUrl + '.dockerignore')
-        
+
     // Create docker-compose files
     if(keysAvailables.includes('docker') && !keysAvailables.includes('database')){
         exec(baseUrl + 'docker-compose.yaml')
@@ -146,7 +155,7 @@ const installOptionalPackages = () => {
                 break;
         }
     }
-    exec('yarn add express compression cors axios dotenv express-rate-limit eslint helmet')
+    exec('yarn add express compression cors axios dotenv express-rate-limit eslint helmet winston')
     exec('yarn add typescript jest supertest @babel/preset-env @babel/preset-typescript @types/supertest @types/node @types/express @types/compression @types/cors @types/jest nodemon ts-node @typescript-eslint/eslint-plugin @typescript-eslint/parser @types/helmet -D', () => exec('yarn install', () => process.exit(0)))
 }
 
