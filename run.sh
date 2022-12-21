@@ -1,4 +1,6 @@
-npm remove cli-create-default-project -g
+npm remove -g cli-create-default-project
+
+rm -rf dist
 
 yarn tsc
 
