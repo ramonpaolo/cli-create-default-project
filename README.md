@@ -31,26 +31,14 @@ This project, is a CLI make in Node.Js, that have the purpose to create default 
 ---
 
 ## How install it?
-It's simple, just you install the package as global or local, example:
+It's simple, just you install the package as global, example:
 
 ```bash
-# Installing package global
-
 # Yarn
 $ yarn global add cli-create-default-project
 
 # npm
 $ npm install -g cli-create-default-project
-```
----
-```bash
-# Installing package local
-
-# Yarn
-$ yarn add cli-create-default-project
-
-# npm
-$ npm install cli-create-default-project
 ```
 
 ---
@@ -58,7 +46,7 @@ $ npm install cli-create-default-project
 After you install the package, you can pass this params:
 
 ```bash
-$ yarn create-project --docker --http2 --database postgres mongo redis --cloud firebase aws
+$ create-project --docker --http2 --database postgres mongo redis --cloud firebase aws
 ```
 
 ---
