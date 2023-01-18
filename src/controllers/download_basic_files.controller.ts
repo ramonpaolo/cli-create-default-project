@@ -22,8 +22,8 @@ const downloadBasicFiles = (url: string, argv: any, keysAvailables: KeysAvailabl
         exec('mv logger_error.utils.ts src/utils/logger_error.utils.ts')
     })
 
-    exec(url + 'src/__tests__/index.spec.ts', () => {
-        exec('mv index.spec.ts src/__tests__/index.spec.ts')
+    exec(url + 'src/__tests__/e2/index.spec.ts', () => {
+        exec('mv index.spec.ts src/__tests__/e2e/index.spec.ts')
     })
 
     log('Downloading basic files')

@@ -17,6 +17,8 @@ const createFolders = (keysAvailables: string[]) => {
     exec('mkdir src/middlewares')
     exec('mkdir src/utils')
     exec('mkdir src/__tests__')
+    exec('mkdir src/__tests__/e2e')
+    
 
     if (keysAvailables.includes('docker')) {
         exec('mkdir docker')
