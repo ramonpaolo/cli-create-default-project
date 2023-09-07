@@ -46,7 +46,7 @@ $ npm install -g cli-create-default-project
 After you install the package, you can pass this params:
 
 ```bash
-$ create-project --docker --http2 --database postgres mongo redis --cloud firebase aws
+$ create-project --docker --http2 --cloud firebase aws
 ```
 
 ---
@@ -57,10 +57,6 @@ Ok, but, what is this params?
     "description": {
         "--docker": "if pass this flag, the docker is enabled in the project",
         "--http2": "if pass this flag, the http2(spdy) is enabled in the project(express)",
-        "--database": {
-            "description": "you can pass until 3 values to enable X database in the project",
-            "values": ["postgres", "mongo", "redis"]
-        },
         "--cloud": {
             "description": "you can pass until 2 values to enable X cloud provider(sdk) in the project",
             "values": ["firebase", "aws"]
@@ -75,7 +71,7 @@ Ok, but, what is this params?
 I want to create a project, with redis and docker enabled. What command I pass to the CLI create it for me?
 
 ```bash
-$ yarn create-project --docker --database redis
+$ yarn create-project --docker
 ```
 
 After that this command finalize, you can see this struture of folders and files:

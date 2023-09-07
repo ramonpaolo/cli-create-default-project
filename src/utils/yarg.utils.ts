@@ -2,7 +2,7 @@ import yargs from 'yargs'
 
 const argv = yargs
     .example('create-project', 'create project with express')
-    .example('create-project --docker --http2 --cloud aws --database redis', 'create a project with docker, http2, nginx and install redis and aws-sdk')
+    .example('create-project --docker --http2 --cloud aws', 'create a project with docker, http2, nginx and aws-sdk')
     .option('http2', {
         type: 'boolean',
         description: 'Configure the project to use http 2.0(sdpy)'
@@ -10,10 +10,6 @@ const argv = yargs
     .option('docker', {
         type: 'boolean',
         description: 'Create default docker files'
-    })
-    .option('database', {
-        type: 'array',
-        description: 'Install the library for the database choosed'
     })
     .option('cloud', {
         type: 'array',

@@ -1,4 +1,4 @@
-import { exec } from "child_process"
+import { execSync } from "child_process"
 
 // Types
 import { KeysAvailables } from "../types"
@@ -7,50 +7,54 @@ import { KeysAvailables } from "../types"
 import log from "../utils/logger.utils"
 
 // Controllers
-import { installOptionalPackages } from "./optional_files.controller"
+import { installPackages } from "./optional_files.controller"
 
-const downloadBasicFiles = (url: string, argv: any, keysAvailables: KeysAvailables[]) => {
-    exec(url + 'src/index.ts', () => {
-        exec('mv index.ts src/index.ts')
-    })
+const downloadFiles = (url: string, argv: any, keysAvailables: KeysAvailables[]) => {
+    execSync(url + 'src/index.ts')
+    execSync('mv index.ts src/index.ts')
 
-    exec(url + 'src/settings/logger.settings.ts', () => {
-        exec('mv logger.settings.ts src/settings/logger.settings.ts')
-    })
+    execSync(url + 'script.sh')
 
-    exec(url + 'src/utils/logger_error.utils.ts', () => {
-        exec('mv logger_error.utils.ts src/utils/logger_error.utils.ts')
-    })
+    execSync(url + 'src/settings/logger.settings.ts')
+    execSync('mv logger.settings.ts src/settings/logger.settings.ts')
 
-    exec(url + 'src/__tests__/e2/index.spec.ts', () => {
-        exec('mv index.spec.ts src/__tests__/e2e/index.spec.ts')
-    })
+    execSync(url + 'src/utils/logger.utils.ts')
+    execSync('mv logger.utils.ts src/utils/logger.utils.ts')
+
+    execSync(url + 'src/settings/sequelize.settings.ts')
+    execSync('mv sequelize.settings.ts src/settings/sequelize.settings.ts')
+    execSync(url + 'src/settings/mongo.settings.ts')
+    execSync('mv mongo.settings.ts src/settings/mongo.settings.ts')
+    execSync(url + 'src/settings/redis.settings.ts')
+    execSync('mv redis.settings.ts src/settings/redis.settings.ts')
+
+    execSync(url + 'src/__tests__/e2e/index.spec.ts')
+    execSync('mv index.spec.ts src/__tests__/e2e/index.spec.ts')
 
     log('Downloading basic files')
 
     // Download basic files of configuration
-    exec(url + '.editorconfig')
-    exec(url + '.gitignore')
-    exec(url + 'LICENSE')
-    exec(url + 'README-P.md', () => exec('mv README-P.md README.md'))
-    exec(url + 'tsconfig.json')
-    exec(url + 'environment.d.ts')
-    exec(url + '.czrc')
-    exec(url + 'jest.config.ts')
-    exec(url + 'babel.config.js')
-    exec(url + '.eslintrc.json')
-    exec(url + '.env')
+    execSync(url + '.editorconfig')
+    execSync(url + '.gitignore')
+    execSync(url + 'LICENSE')
+    execSync(url + 'README-P.md')
+    execSync('mv README-P.md README.md')
+    execSync(url + 'tsconfig.json')
+    execSync(url + 'environment.d.ts')
+    execSync(url + '.czrc')
+    execSync(url + 'jest.config.ts')
+    execSync(url + 'babel.config.js')
+    execSync(url + '.eslintrc.json')
+    execSync(url + '.env')
+    execSync(url + '.env.test')
 
-    if (keysAvailables.includes('docker'))
-        exec(url + '.dockerignore')
-
-    // Create docker-compose files
-    if (keysAvailables.includes('docker') && !keysAvailables.includes('database')) {
-        exec(url + 'docker-compose.yaml')
-        exec(url + 'docker-compose-dev.yaml')
+    if (keysAvailables.includes('docker')) {
+        execSync(url + '.dockerignore')
+        execSync(url + 'docker-compose.yaml')
+        execSync(url + 'docker-compose-dev.yaml')
     }
 
-    setTimeout(() => installOptionalPackages(url, argv, keysAvailables), 2000)
+    installPackages(url, argv, keysAvailables)
 }
 
-export default downloadBasicFiles
+export default downloadFiles
