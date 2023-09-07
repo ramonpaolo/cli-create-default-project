@@ -1,6 +1,6 @@
 {
   "name": "cli-create-default-project",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "dist/index.js",
   "types": "dist/types",
   "description": "CLI to create default structure of a project express CRUD",
