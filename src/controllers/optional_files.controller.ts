@@ -7,7 +7,6 @@ import { Cloud, KeysAvailables } from "../types"
 import log from "../utils/logger.utils"
 
 const installPackages = (url: string, argv: any, keysAvailables: KeysAvailables[]) => {
-    console.log('ID: ', argv, keysAvailables)
     for (const key of keysAvailables) {
         switch (key) {
             case 'cloud':
@@ -65,10 +64,13 @@ const installPackages = (url: string, argv: any, keysAvailables: KeysAvailables[
 
                 break
         }
-        execSync('yarn add express compression cors axios dotenv express-rate-limit eslint helmet winston mongoose pg sequelize ioredis')
-        execSync('yarn add typescript jest supertest @babel/preset-env @babel/preset-typescript @types/supertest @types/node @types/express @types/compression @types/cors @types/jest nodemon ts-node @typescript-eslint/eslint-plugin @typescript-eslint/parser @types/helmet @types/pg @types/sequelize -D')
-        log('Finalized with success')
     }
+
+    execSync('yarn add express compression cors axios dotenv express-rate-limit eslint helmet winston mongoose pg sequelize sequelize-cli ioredis')
+    execSync('yarn add typescript jest supertest @babel/preset-env @babel/preset-typescript @types/supertest @types/node @types/express @types/compression @types/cors @types/jest nodemon ts-node @typescript-eslint/eslint-plugin @typescript-eslint/parser @types/helmet @types/pg @types/sequelize -D')
+    
+    execSync('cd ./src/database && npx sequelize-cli model:generate --name User --attributes name:string,name:string,password:string ')
+    log('Finalized with success')
 }
 
 export {

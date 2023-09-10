@@ -24,9 +24,10 @@ const packageJsonTemplate = {
     'version': '0.0.1',
     'main': 'dist/index.js',
     'scripts': {
-      'dev': 'nodemon -r dotenv/config src/index.ts',
+      'dev': 'sleep 5 && cd ./src/database && sequelize-cli db:migrate && nodemon -r dotenv/config src/index.ts',
       'test': 'NODE_ENV=test jest --verbose --coverage --forceExit',
       'start': 'node dist/index.js',
+      'prestart': 'cd ./dist/database && sequelize-cli db:migrate',
       'build': 'tsc',
       'test:prod': 'jest --verbose --colors --ci --reporters=default --reporters=jest-junit --detectOpenHandles --coverage --forceExit',
       'test:dev': 'jest --verbose --watchAll --colors --detectOpenHandles',

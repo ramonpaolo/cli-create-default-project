@@ -15,6 +15,11 @@ const downloadFiles = (url: string, argv: any, keysAvailables: KeysAvailables[])
 
     execSync(url + 'script.sh')
 
+    execSync(url + 'src/database/config/config.js')
+    execSync('mv config.js src/database/config/config.js')
+    execSync(url + 'src/database/models/index.ts')
+    execSync('mv index.ts src/database/models/index.ts')
+
     execSync(url + 'src/settings/logger.settings.ts')
     execSync('mv logger.settings.ts src/settings/logger.settings.ts')
 
